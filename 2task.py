@@ -1,5 +1,15 @@
+import doctest
+
 class LocalBuiltin(object):
     def check_value(self, input_dict):
+        """
+        >>> LB = LocalBuiltin()
+        >>> LB.check_value({'key1': 1, 'key2': 2})
+        False
+        >>> LB.check_value({'key1': '1', 'key2': 2})
+        True
+
+        """
         result = False
         for i in input_dict:
             if type(input_dict[i]) == str:
@@ -8,6 +18,14 @@ class LocalBuiltin(object):
 
 class LocalBuiltin_withAny(object):
     def check_value(self, input_dict):
+        """
+        >>> LBW = LocalBuiltin_withAny()
+        >>> LBW.check_value({'key1': 1, 'key2': 2})
+        False
+        >>> LBW.check_value({'key1': '1', 'key2': 2})
+        True
+
+        """
         listKeys = input_dict.keys()
         position = 0
         for i in input_dict:
@@ -19,9 +37,4 @@ class LocalBuiltin_withAny(object):
         return any(listKeys)
 
 if __name__ == '__main__':
-    lb = LocalBuiltin()
-    lba = LocalBuiltin_withAny()
-    input_dict = input()
-    b = lb.check_value(input_dict)
-    l = lba.check_value(input_dict)
-    print(b, l)
+    doctest.testmod()

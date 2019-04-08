@@ -1,3 +1,5 @@
+import doctest
+
 class LocalBuiltin(object):
     def __init__(self):
         self.inputList = []
@@ -18,12 +20,23 @@ class LocalBuiltin(object):
         return max_value
 
     def rang_checker(self, input_list, range1):
+        """
+        :param input_list: list
+        :param range1: tuple
+        :return: bool
+        >>> lb = LocalBuiltin()
+        >>> lb.rang_checker([1, 5, 8], (1, 9))
+        True
+        >>> lb.rang_checker([1, 5, 8, 11], (1, 9))
+        False
+
+        """
         if all(input_list) and all(range1):
             result = True
             min_value = self.__define_min(range1)
             max_value = self.__define_max(range1)
-            for i in range(len(inputList)):
-                if inputList[i] < min_value or inputList[i] > max_value:
+            for idx in range(len(input_list)):
+                if input_list[idx] < min_value or input_list[idx] > max_value:
                     result = False
             return result
         else:
@@ -31,7 +44,6 @@ class LocalBuiltin(object):
 
 if __name__ == '__main__':
     lb = LocalBuiltin()
-    inputList = input()
-    inputRange = input()
-    b = lb.rang_checker(inputList, inputRange)
-    print(b)
+    f = lb.rang_checker([1, 5, 8], (0, 9))
+    print(f)
+    doctest.testmod()
